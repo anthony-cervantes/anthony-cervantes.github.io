@@ -43,6 +43,60 @@
     
 
     <meta name="generator" content="Hugo 0.64.0" />
+    <style>
+      .projects {
+        margin-top: 2.5rem;
+        text-align: left;
+        max-width: 700px;
+      }
+
+      .project-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        line-height: 1.9;
+        display: grid;
+        gap: 1rem;
+      }
+
+      .project-card {
+        background: rgba(20, 34, 54, 0.7);
+        border: 1px solid rgba(142, 200, 255, 0.2);
+        border-radius: 14px;
+        padding: 0.9rem 1rem;
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+        transform: translateY(0);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .project-card:hover,
+      .project-card:focus-within {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+      }
+
+      .project-card a {
+        color: #8ec8ff;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .project-card a:hover {
+        text-decoration: underline;
+      }
+
+      .project-meta {
+        color: #b8c2d1;
+        display: block;
+      }
+
+      @media (max-width: 480px) {
+        .project-card {
+          border-radius: 12px;
+          padding: 0.8rem 0.85rem;
+        }
+      }
+    </style>
   </head>
 
   <body class="">
@@ -56,13 +110,7 @@
       <ul class="navigation-list">
         
           
-            <li class="navigation-item  align-center ">
-            <a class="navigation-link" href="/posts">Blog</a>
-            </li>
           
-            <li class="navigation-item  align-center ">
-            <a class="navigation-link" href="/about">About</a>
-            </li>
           
         
         
@@ -100,46 +148,30 @@
           </a>
         </li>
       
-        <li class="social-item">
-          <a href="https://www.linkedin.com/in/anthony-cervantes-0a169036//" aria-label="LinkedIn" >
-            
-              <i class="fab fa-linkedin" aria-hidden="true"></i>
-            
-          </a>
-        </li>
-      
-        <li class="social-item">
-          <a href="https://www.linkedin.com/in/anthony-cervantes-0a169036//" aria-label="LinkedIn" >
-            
-              LinkedIn
-            
-          </a>
-        </li>
-      
     </ul>
 
-    <section class="projects" style="margin-top: 2.5rem; text-align: left; max-width: 600px;">
+    <section class="projects">
       <h2 style="text-align: center; margin-bottom: 1rem; color: #fff;">Projects</h2>
-      <ul style="list-style: none; padding: 0; margin: 0; line-height: 1.9;">
-        <li>
-          <a style="color: #8ec8ff;" href="https://github.com/anthony-cervantes/anthony-cervantes.github.io" target="_blank" rel="noopener">anthony-cervantes.github.io</a>
-          <span style="color: #b8c2d1;"> · [Site] Personal portfolio site</span>
+      <ul class="project-list">
+        <li class="project-card">
+          <a href="https://github.com/anthony-cervantes/anthony-cervantes.github.io" target="_blank" rel="noopener">anthony-cervantes.github.io</a>
+          <span class="project-meta"> · [Site] Personal portfolio site</span>
         </li>
-        <li>
-          <a style="color: #8ec8ff;" href="https://anthony-cervantes.github.io/patch-force-runtime-rebellion/" target="_blank" rel="noopener">Patch Force: Runtime Rebellion</a>
-          <span style="color: #b8c2d1;"> · [Game] Rust/WASM browser game</span>
+        <li class="project-card">
+          <a href="https://anthony-cervantes.github.io/patch-force-runtime-rebellion/" target="_blank" rel="noopener">Patch Force: Runtime Rebellion</a>
+          <span class="project-meta"> · [Game] Rust/WASM browser game</span>
         </li>
-        <li>
-          <a style="color: #8ec8ff;" href="https://github.com/anthony-cervantes/scylla-rust-mcp" target="_blank" rel="noopener">scylla-rust-mcp</a>
-          <span style="color: #b8c2d1;"> · [Tool] MCP server for ScyllaDB</span>
+        <li class="project-card">
+          <a href="https://github.com/anthony-cervantes/scylla-rust-mcp" target="_blank" rel="noopener">scylla-rust-mcp</a>
+          <span class="project-meta"> · [Tool] MCP server for ScyllaDB</span>
         </li>
-        <li>
-          <a style="color: #8ec8ff;" href="https://github.com/anthony-cervantes/homebrew-tap" target="_blank" rel="noopener">homebrew-tap</a>
-          <span style="color: #b8c2d1;"> · [Tool] Homebrew tap for Anthony Cervantes projects</span>
+        <li class="project-card">
+          <a href="https://github.com/anthony-cervantes/homebrew-tap" target="_blank" rel="noopener">homebrew-tap</a>
+          <span class="project-meta"> · [Tool] Homebrew tap for Anthony Cervantes projects</span>
         </li>
-        <li>
-          <a style="color: #8ec8ff;" href="https://github.com/anthony-cervantes/anthony-cervantes" target="_blank" rel="noopener">anthony-cervantes</a>
-          <span style="color: #b8c2d1;"> · [Meta] Personal repository</span>
+        <li class="project-card">
+          <a href="https://github.com/anthony-cervantes/anthony-cervantes" target="_blank" rel="noopener">anthony-cervantes</a>
+          <span class="project-meta"> · [Meta] Personal repository</span>
         </li>
       </ul>
     </section>
