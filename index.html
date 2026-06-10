@@ -1,249 +1,359 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Anthony Cervantes" />
+        <meta
+            name="description"
+            content="Anthony Cervantes&#39; personal website"
+        />
+        <meta name="keywords" content="blog,developer,personal" />
 
-    <meta name="author" content="Anthony Cervantes">
-    <meta name="description" content="Anthony Cervantes&#39; personal website">
-    <meta name="keywords" content="blog,developer,personal">
+        <meta property="og:site_name" content="Anthony Cervantes" />
+        <meta property="og:title" content="Anthony Cervantes" />
+        <meta
+            property="og:description"
+            content="Anthony Cervantes&#39; personal website"
+        />
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:url"
+            content="https://anthony-cervantes.github.io/"
+        />
+        <meta
+            property="og:image"
+            content="https://anthony-cervantes.github.io/images/tn.png"
+        />
+        <meta name="twitter:card" content="summary" />
+        <meta
+            name="twitter:site"
+            content="https://anthony-cervantes.github.io/"
+        />
+        <meta
+            name="twitter:image"
+            content="https://anthony-cervantes.github.io/images/tn.png"
+        />
 
-    <meta property="og:site_name" content="Anthony Cervantes">
-    <meta property="og:title" content="Anthony Cervantes">
-    <meta property="og:description" content="Anthony Cervantes&#39; personal website">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://anthony-cervantes.github.io/">
-    <meta property="og:image" content="https://anthony-cervantes.github.io/images/tn.png">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="https://anthony-cervantes.github.io/">
-    <meta name="twitter:image" content="https://anthony-cervantes.github.io/images/tn.png">
+        <base href="https://anthony-cervantes.github.io/" />
+        <title>Anthony Cervantes</title>
 
-    <base href="https://anthony-cervantes.github.io/">
-    <title>Anthony Cervantes</title>
+        <link rel="canonical" href="https://anthony-cervantes.github.io/" />
 
-    <link rel="canonical" href="https://anthony-cervantes.github.io/">
-    
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    
-    <link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700">
-    <link rel="stylesheet" href="/css/normalize.min.css">
-    <link rel="stylesheet" href="/css/style.min.css">
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+            integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+            crossorigin="anonymous"
+        />
 
-    
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700"
+        />
+        <link rel="stylesheet" href="/css/normalize.min.css" />
+        <link rel="stylesheet" href="/css/style.min.css" />
 
-    
+        <link
+            rel="icon"
+            type="image/png"
+            href="/images/favicon-32x32.png"
+            sizes="32x32"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/images/favicon-16x16.png"
+            sizes="16x16"
+        />
 
-    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+        <style>
+            .projects {
+                margin-top: 2.5rem;
+                text-align: left;
+                max-width: 700px;
+            }
 
-    <style>
-      .projects {
-        margin-top: 2.5rem;
-        text-align: left;
-        max-width: 700px;
-      }
+            .project-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                line-height: 1.9;
+                display: grid;
+                gap: 1rem;
+            }
 
-      .project-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        line-height: 1.9;
-        display: grid;
-        gap: 1rem;
-      }
+            .project-card {
+                background: rgba(20, 34, 54, 0.7);
+                border: 1px solid rgba(142, 200, 255, 0.2);
+                border-radius: 14px;
+                padding: 0.9rem 1rem;
+                box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+                transform: translateY(0);
+                transition:
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease;
+            }
 
-      .project-card {
-        background: rgba(20, 34, 54, 0.7);
-        border: 1px solid rgba(142, 200, 255, 0.2);
-        border-radius: 14px;
-        padding: 0.9rem 1rem;
-        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
-        transform: translateY(0);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
+            .project-card:hover,
+            .project-card:focus-within {
+                transform: translateY(-4px);
+                box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+            }
 
-      .project-card:hover,
-      .project-card:focus-within {
-        transform: translateY(-4px);
-        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
-      }
+            .project-card a {
+                color: #8ec8ff;
+                text-decoration: none;
+                font-weight: 600;
+            }
 
-      .project-card a {
-        color: #8ec8ff;
-        text-decoration: none;
-        font-weight: 600;
-      }
+            .project-card a:hover {
+                text-decoration: underline;
+            }
 
-      .project-card a:hover {
-        text-decoration: underline;
-      }
+            .project-meta {
+                color: #b8c2d1;
+                display: block;
+            }
 
-      .project-meta {
-        color: #b8c2d1;
-        display: block;
-      }
+            @media (max-width: 480px) {
+                .project-card {
+                    border-radius: 12px;
+                    padding: 0.8rem 0.85rem;
+                }
+            }
+        </style>
+    </head>
 
-      @media (max-width: 480px) {
-        .project-card {
-          border-radius: 12px;
-          padding: 0.8rem 0.85rem;
-        }
-      }
-    </style>
-  </head>
+    <body class="">
+        <main class="wrapper">
+            <nav class="navigation">
+                <section class="container">
+                    <a class="navigation-title" href="/">Anthony Cervantes</a>
+                    <input type="checkbox" id="menu-control" />
+                    <label class="menu-mobile float-right" for="menu-control">
+                        <span class="btn-mobile float-right">&#9776;</span>
+                        <ul class="navigation-list"></ul>
+                    </label>
+                </section>
+            </nav>
 
-  <body class="">
-    <main class="wrapper">
-      <nav class="navigation">
-  <section class="container">
-    <a class="navigation-title" href="/">Anthony Cervantes</a>
-    <input type="checkbox" id="menu-control"/>
-    <label class="menu-mobile  float-right " for="menu-control">
-      <span class="btn-mobile  float-right ">&#9776;</span>
-      <ul class="navigation-list">
-        
-          
-          
-          
-        
-        
-      </ul>
-    </label>
-  </section>
-</nav>
+            <div class="content">
+                <section class="container centered">
+                    <div class="about">
+                        <div class="avatar">
+                            <img src="/images/avatar.jpg" alt="avatar" />
+                        </div>
 
+                        <h1>Anthony Cervantes</h1>
+                        <h2>SOFTWARE ENGINEER</h2>
 
-      <div class="content">
-        
-  <section class="container centered">
-  <div class="about">
-    
-      <div class="avatar"><img src="/images/avatar.jpg" alt="avatar"></div>
-    
-    <h1>Anthony Cervantes</h1>
-    <h2>SOFTWARE ENGINEER</h2>
-    
-    <ul class="social-list">
-      
-        <li class="social-item">
-          <a href="https://github.com/anthony-cervantes" aria-label="Github" >
-            
-              <i class="fab fa-github" aria-hidden="true"></i>
-            
-          </a>
-        </li>
-      
-        <li class="social-item">
-          <a href="https://twitter.com/maverick052184/" aria-label="Twitter" >
-            
-              <i class="fab fa-twitter" aria-hidden="true"></i>
-            
-          </a>
-        </li>
-      
-    </ul>
+                        <ul class="social-list">
+                            <li class="social-item">
+                                <a
+                                    href="https://github.com/anthony-cervantes"
+                                    aria-label="Github"
+                                >
+                                    <i
+                                        class="fab fa-github"
+                                        aria-hidden="true"
+                                    ></i>
+                                </a>
+                            </li>
 
-    <section class="projects">
-      <h2 style="text-align: center; margin-bottom: 1rem; color: #fff;">Projects</h2>
-      <ul class="project-list">
-        <li class="project-card">
-          <a href="https://github.com/anthony-cervantes/anthony-cervantes.github.io" target="_blank" rel="noopener">anthony-cervantes.github.io</a>
-          <span class="project-meta"> · [Site] Personal portfolio site</span>
-        </li>
-        <li class="project-card">
-          <a href="https://anthony-cervantes.github.io/patch-force-runtime-rebellion/" target="_blank" rel="noopener">Patch Force: Runtime Rebellion</a>
-          <span class="project-meta"> · [Game] Rust/WASM browser game</span>
-        </li>
-        <li class="project-card">
-          <a href="https://github.com/anthony-cervantes/scylla-rust-mcp" target="_blank" rel="noopener">scylla-rust-mcp</a>
-          <span class="project-meta"> · [Tool] MCP server for ScyllaDB</span>
-        </li>
-        <li class="project-card">
-          <a href="https://github.com/anthony-cervantes/homebrew-tap" target="_blank" rel="noopener">homebrew-tap</a>
-          <span class="project-meta"> · [Tool] Homebrew tap for Anthony Cervantes projects</span>
-        </li>
-        <li class="project-card">
-          <a href="https://github.com/anthony-cervantes/anthony-cervantes" target="_blank" rel="noopener">anthony-cervantes</a>
-          <span class="project-meta"> · [Meta] Personal repository</span>
-        </li>
-      </ul>
-    </section>
-    
-  </div>
-</section>
+                            <li class="social-item">
+                                <a
+                                    href="https://twitter.com/maverick052184/"
+                                    aria-label="Twitter"
+                                >
+                                    <i
+                                        class="fab fa-twitter"
+                                        aria-hidden="true"
+                                    ></i>
+                                </a>
+                            </li>
+                        </ul>
 
+                        <section class="projects">
+                            <h2
+                                style="
+                                    text-align: center;
+                                    margin-bottom: 1rem;
+                                    color: #fff;
+                                "
+                            >
+                                Projects
+                            </h2>
+                            <ul class="project-list">
+                                <li class="project-card">
+                                    <a
+                                        href="https://github.com/anthony-cervantes/anthony-cervantes.github.io"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >anthony-cervantes.github.io</a
+                                    >
+                                    <span class="project-meta">
+                                        · [Site] Personal portfolio site</span
+                                    >
+                                </li>
+                                <li class="project-card">
+                                    <a
+                                        href="https://anthony-cervantes.github.io/patch-force-runtime-rebellion/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Patch Force: Runtime Rebellion</a
+                                    >
+                                    <span class="project-meta">
+                                        · [Game] Rust/WASM browser game</span
+                                    >
+                                </li>
+                                <li class="project-card">
+                                    <a
+                                        href="https://github.com/anthony-cervantes/scylla-rust-mcp"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >scylla-rust-mcp</a
+                                    >
+                                    <span class="project-meta">
+                                        · [Tool] MCP server for ScyllaDB</span
+                                    >
+                                </li>
+                                <li class="project-card">
+                                    <a
+                                        href="https://github.com/anthony-cervantes/homebrew-tap"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >homebrew-tap</a
+                                    >
+                                    <span class="project-meta">
+                                        · [Tool] Homebrew tap for Anthony
+                                        Cervantes projects</span
+                                    >
+                                </li>
+                                <li class="project-card">
+                                    <a
+                                        href="https://github.com/anthony-cervantes/anthony-cervantes"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >anthony-cervantes</a
+                                    >
+                                    <span class="project-meta">
+                                        · [Meta] Personal repository</span
+                                    >
+                                </li>
+                            </ul>
+                        </section>
+                    </div>
+                </section>
+            </div>
 
-      </div>
-      
-        <footer class="footer">
-  <section class="container">
-    
-      <div class="sns-shares sp-sns-shares">
-        
-          <a class="sns-share twitter-share" href="https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fanthony-cervantes.github.io%2F&ref_src=twsrc%5Etfw&text=Anthony%20Cervantes Anthony%20Cervantes&tw_p=tweetbutton&url=https%3A%2F%2Fanthony-cervantes.github.io%2F"><i class="fab fa-twitter"></i></a>
-        
-        
-          <a class="fb btn sns-share fb-share" href="http://www.facebook.com/share.php?u=https%3A%2F%2Fanthony-cervantes.github.io%2F" onclick="window.open(this.href, 'FBwindow', 'width=650, height=450, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fab fa-facebook-f"></i></a>
-        
-        
-          <a class="sns-share hatena-share" href="http://b.hatena.ne.jp/entry/https://anthony-cervantes.github.io/"  data-hatena-bookmark-layout="touch" data-hatena-bookmark-width="40" data-hatena-bookmark-height="40" title="このエントリーをはてなブックマークに追加"><i class="fas fa-bookmark"></i></a>
-        
-        
-          <a class="sns-share line-share" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fanthony-cervantes.github.io%2F"><i class="fab fa-line"></i></a>
-        
-        
-      </div>
-    
-    
-      <p>Enter a text here.</p>
-    
-     © 0001 · Built and deployed as a static site.
+            <footer class="footer">
+                <section class="container">
+                    <div class="sns-shares sp-sns-shares">
+                        <a
+                            class="sns-share twitter-share"
+                            href="https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fanthony-cervantes.github.io%2F&ref_src=twsrc%5Etfw&text=Anthony%20Cervantes Anthony%20Cervantes&tw_p=tweetbutton&url=https%3A%2F%2Fanthony-cervantes.github.io%2F"
+                            ><i class="fab fa-twitter"></i
+                        ></a>
 
-  </section>
-</footer>
-<div class="fixed-bar">
-  <section class="container">
-    
-      <p id="privateTriggerText">Do you want to know me more private?→<a id="privateTrigger">Click!</a></p>
-    
-    
-      <div class="sns-shares pc-sns-shares">
-        
-          <a class="sns-share twitter-share" href="https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fanthony-cervantes.github.io%2F&ref_src=twsrc%5Etfw&text=Anthony%20Cervantes Anthony%20Cervantes&tw_p=tweetbutton&url=https%3A%2F%2Fanthony-cervantes.github.io%2F"><i class="fab fa-twitter"></i></a>
-        
-        
-          <a class="fb btn sns-share fb-share" href="http://www.facebook.com/share.php?u=https%3A%2F%2Fanthony-cervantes.github.io%2F" onclick="window.open(this.href, 'FBwindow', 'width=650, height=450, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fab fa-facebook-f"></i></a>
-        
-        
-          <a class="sns-share hatena-share" href="http://b.hatena.ne.jp/entry/https://anthony-cervantes.github.io/"  data-hatena-bookmark-layout="touch" data-hatena-bookmark-width="40" data-hatena-bookmark-height="40" title="このエントリーをはてなブックマークに追加"><i class="fas fa-bookmark"></i></a>
-        
-        
-          <a class="sns-share line-share" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fanthony-cervantes.github.io%2F"><i class="fab fa-line"></i></a>
-        
-        
-      </div>
-    
-  </section>
-</div>
+                        <a
+                            class="fb btn sns-share fb-share"
+                            href="http://www.facebook.com/share.php?u=https%3A%2F%2Fanthony-cervantes.github.io%2F"
+                            onclick="
+                                window.open(
+                                    this.href,
+                                    'FBwindow',
+                                    'width=650, height=450, menubar=no, toolbar=no, scrollbars=yes',
+                                );
+                                return false;
+                            "
+                            ><i class="fab fa-facebook-f"></i
+                        ></a>
 
-      
-    </main>
+                        <a
+                            class="sns-share hatena-share"
+                            href="http://b.hatena.ne.jp/entry/https://anthony-cervantes.github.io/"
+                            data-hatena-bookmark-layout="touch"
+                            data-hatena-bookmark-width="40"
+                            data-hatena-bookmark-height="40"
+                            title="このエントリーをはてなブックマークに追加"
+                            ><i class="fas fa-bookmark"></i
+                        ></a>
 
-    
+                        <a
+                            class="sns-share line-share"
+                            href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fanthony-cervantes.github.io%2F"
+                            ><i class="fab fa-line"></i
+                        ></a>
+                    </div>
 
-  <script src="/js/app.js"></script>
-  
-  <script>
-  (function($) {
-    $(function() {
-      $('#privateTrigger').on('click', function() {
-        $('.private').slideToggle();
-        $('#privateTriggerText').text("Thank You! Please share it if you like it→");
-      });
-    });
-   })(jQuery);
-  </script>
-  
-  </body>
+                    © 2026 · Built and deployed as a static site.
+                </section>
+            </footer>
+            <div class="fixed-bar">
+                <section class="container">
+                    <p id="privateTriggerText">
+                        Do you want to know me more private?→<a
+                            id="privateTrigger"
+                            >Click!</a
+                        >
+                    </p>
+
+                    <div class="sns-shares pc-sns-shares">
+                        <a
+                            class="sns-share twitter-share"
+                            href="https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fanthony-cervantes.github.io%2F&ref_src=twsrc%5Etfw&text=Anthony%20Cervantes Anthony%20Cervantes&tw_p=tweetbutton&url=https%3A%2F%2Fanthony-cervantes.github.io%2F"
+                            ><i class="fab fa-twitter"></i
+                        ></a>
+
+                        <a
+                            class="fb btn sns-share fb-share"
+                            href="http://www.facebook.com/share.php?u=https%3A%2F%2Fanthony-cervantes.github.io%2F"
+                            onclick="
+                                window.open(
+                                    this.href,
+                                    'FBwindow',
+                                    'width=650, height=450, menubar=no, toolbar=no, scrollbars=yes',
+                                );
+                                return false;
+                            "
+                            ><i class="fab fa-facebook-f"></i
+                        ></a>
+
+                        <a
+                            class="sns-share hatena-share"
+                            href="http://b.hatena.ne.jp/entry/https://anthony-cervantes.github.io/"
+                            data-hatena-bookmark-layout="touch"
+                            data-hatena-bookmark-width="40"
+                            data-hatena-bookmark-height="40"
+                            title="このエントリーをはてなブックマークに追加"
+                            ><i class="fas fa-bookmark"></i
+                        ></a>
+
+                        <a
+                            class="sns-share line-share"
+                            href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fanthony-cervantes.github.io%2F"
+                            ><i class="fab fa-line"></i
+                        ></a>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <script src="/js/app.js"></script>
+
+        <script>
+            (function ($) {
+                $(function () {
+                    $("#privateTrigger").on("click", function () {
+                        $(".private").slideToggle();
+                        $("#privateTriggerText").text(
+                            "Thank You! Please share it if you like it→",
+                        );
+                    });
+                });
+            })(jQuery);
+        </script>
+    </body>
 </html>
