@@ -147,25 +147,31 @@
                 border-color: var(--line);
             }
 
-            .theme-toggle {
+            .theme-select {
                 margin: 1.2rem 0 0 1rem;
                 border: 1px solid var(--line);
                 border-radius: 999px;
                 color: var(--text);
                 background-color: transparent;
-                padding: 0.3rem 0.8rem;
+                padding: 0.4rem 1rem;
                 cursor: pointer;
                 font-family: inherit;
                 font-size: 1.2rem;
                 line-height: 1.2;
+                appearance: none;
                 transition:
                     background-color 0.2s ease,
                     border-color 0.2s ease;
             }
 
-            .theme-toggle:hover,
-            .theme-toggle:focus-visible {
+            .theme-select:hover,
+            .theme-select:focus-visible {
                 background-color: rgba(255, 255, 255, 0.08);
+            }
+
+            .theme-select option {
+                background: var(--surface);
+                color: var(--text);
             }
 
             .projects {
@@ -236,15 +242,11 @@
             <nav class="navigation">
                 <section class="container">
                     <a class="navigation-title" href="/">Anthony Cervantes</a>
-                    <button
-                        id="themeToggle"
-                        class="theme-toggle float-right"
-                        type="button"
-                        aria-pressed="false"
-                        aria-label="Switch to dark mode"
-                    >
-                        🌙 Dark
-                    </button>
+                    <select id="themeSelect" class="theme-select float-right" aria-label="Theme selector">
+                        <option value="system">System</option>
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
                     <input type="checkbox" id="menu-control" />
                     <label class="menu-mobile float-right" for="menu-control">
                         <span class="btn-mobile float-right">&#9776;</span>
@@ -456,46 +458,54 @@
                 const STORAGE_KEY = "themePreference";
                 const DARK_CLASS = "theme-dark";
                 const LIGHT_CLASS = "theme-light";
-                const toggleButton = document.getElementById("themeToggle");
+                const select = document.getElementById("themeSelect");
 
-                function setTheme(mode) {
-                    const isDark = mode === "dark";
+                function applyTheme(mode) {
+                    const preferredMode = mode || "system";
+                    const useDark =
+                        preferredMode === "dark" ||
+                        (preferredMode === "system" &&
+                            window.matchMedia("(prefers-color-scheme: dark)")
+                                .matches);
+
                     document.body.classList.remove(DARK_CLASS, LIGHT_CLASS);
                     document.body.classList.add(
-                        isDark ? DARK_CLASS : LIGHT_CLASS,
+                        useDark ? DARK_CLASS : LIGHT_CLASS,
                     );
-                    localStorage.setItem(STORAGE_KEY, mode);
-                    if (!toggleButton) return;
-                    toggleButton.textContent = isDark ? "☀️ Light" : "🌙 Dark";
-                    toggleButton.setAttribute(
-                        "aria-label",
-                        isDark
-                            ? "Switch to light mode"
-                            : "Switch to dark mode",
-                    );
-                    toggleButton.setAttribute("aria-pressed", isDark);
+
+                    if (select) {
+                        select.value = preferredMode;
+                    }
+
+                    try {
+                        localStorage.setItem(STORAGE_KEY, preferredMode);
+                    } catch (e) {}
                 }
 
-                const saved = localStorage.getItem(STORAGE_KEY);
-                const prefersDark = window.matchMedia(
+                let preference = "system";
+                try {
+                    const saved = localStorage.getItem(STORAGE_KEY);
+                    if (saved) {
+                        preference = saved;
+                    }
+                } catch (err) {}
+
+                applyTheme(preference);
+
+                const systemTheme = window.matchMedia(
                     "(prefers-color-scheme: dark)",
-                ).matches;
-                const initial = saved || (prefersDark ? "dark" : "light");
-                setTheme(initial);
+                );
 
-                window
-                    .matchMedia("(prefers-color-scheme: dark)")
-                    .addEventListener("change", function (event) {
-                        if (!localStorage.getItem(STORAGE_KEY)) {
-                            setTheme(event.matches ? "dark" : "light");
-                        }
-                    });
+                systemTheme.addEventListener("change", function () {
+                    if (preference === "system") {
+                        applyTheme("system");
+                    }
+                });
 
-                if (toggleButton) {
-                    toggleButton.addEventListener("click", function () {
-                        const currentlyDark =
-                            document.body.classList.contains(DARK_CLASS);
-                        setTheme(currentlyDark ? "light" : "dark");
+                if (select) {
+                    select.addEventListener("change", function () {
+                        preference = select.value;
+                        applyTheme(preference);
                     });
                 }
             })();
