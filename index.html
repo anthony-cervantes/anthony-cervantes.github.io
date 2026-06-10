@@ -69,6 +69,105 @@
         />
 
         <style>
+            :root {
+                --bg: #f7f9fc;
+                --surface: #ffffff;
+                --text: #1f2a44;
+                --muted: #42506f;
+                --heading: #0f1b34;
+                --link: #2f6dd4;
+                --link-hover: #1447a5;
+                --line: rgba(17, 22, 30, 0.08);
+                --card-bg: rgba(255, 255, 255, 0.7);
+                --card-border: rgba(47, 109, 212, 0.2);
+                --card-text: #1f2a44;
+                --card-meta: #42506f;
+                --card-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+                --card-shadow-hover: 0 14px 32px rgba(0, 0, 0, 0.18);
+            }
+
+            body.theme-dark {
+                --bg: #070b16;
+                --surface: #0b1428;
+                --text: #ecf0f7;
+                --muted: #b8c2d1;
+                --heading: #ffffff;
+                --link: #8ec8ff;
+                --link-hover: #c8e4ff;
+                --line: rgba(255, 255, 255, 0.15);
+                --card-bg: rgba(20, 34, 54, 0.7);
+                --card-border: rgba(142, 200, 255, 0.25);
+                --card-text: #ecf0f7;
+                --card-meta: #b8c2d1;
+                --card-shadow: 0 10px 22px rgba(0, 0, 0, 0.45);
+                --card-shadow-hover: 0 14px 32px rgba(0, 0, 0, 0.55);
+            }
+
+            body,
+            .fixed-bar,
+            .navigation,
+            .footer,
+            .project-card {
+                transition:
+                    background-color 0.25s ease,
+                    color 0.25s ease,
+                    box-shadow 0.25s ease;
+            }
+
+            body {
+                background-color: var(--bg);
+                color: var(--text);
+            }
+
+            a,
+            a:focus,
+            a:hover {
+                color: var(--link);
+            }
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                color: var(--heading);
+            }
+
+            .wrapper,
+            .content,
+            .container {
+                background-color: transparent;
+            }
+
+            .navigation,
+            .fixed-bar,
+            .footer {
+                background-color: var(--surface);
+                border-color: var(--line);
+            }
+
+            .theme-toggle {
+                margin: 1.2rem 0 0 1rem;
+                border: 1px solid var(--line);
+                border-radius: 999px;
+                color: var(--text);
+                background-color: transparent;
+                padding: 0.3rem 0.8rem;
+                cursor: pointer;
+                font-family: inherit;
+                font-size: 1.2rem;
+                line-height: 1.2;
+                transition:
+                    background-color 0.2s ease,
+                    border-color 0.2s ease;
+            }
+
+            .theme-toggle:hover,
+            .theme-toggle:focus-visible {
+                background-color: rgba(255, 255, 255, 0.08);
+            }
+
             .projects {
                 margin-top: 2.5rem;
                 text-align: left;
@@ -85,11 +184,12 @@
             }
 
             .project-card {
-                background: rgba(20, 34, 54, 0.7);
-                border: 1px solid rgba(142, 200, 255, 0.2);
+                background: var(--card-bg);
+                border: 1px solid var(--card-border);
+                color: var(--card-text);
                 border-radius: 14px;
                 padding: 0.9rem 1rem;
-                box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+                box-shadow: var(--card-shadow);
                 transform: translateY(0);
                 transition:
                     transform 0.2s ease,
@@ -99,11 +199,11 @@
             .project-card:hover,
             .project-card:focus-within {
                 transform: translateY(-4px);
-                box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+                box-shadow: var(--card-shadow-hover);
             }
 
             .project-card a {
-                color: #8ec8ff;
+                color: var(--link);
                 text-decoration: none;
                 font-weight: 600;
             }
@@ -113,8 +213,13 @@
             }
 
             .project-meta {
-                color: #b8c2d1;
+                color: var(--card-meta);
                 display: block;
+            }
+
+            .project-card a:focus-visible,
+            .project-card a:hover {
+                color: var(--link-hover);
             }
 
             @media (max-width: 480px) {
@@ -131,6 +236,15 @@
             <nav class="navigation">
                 <section class="container">
                     <a class="navigation-title" href="/">Anthony Cervantes</a>
+                    <button
+                        id="themeToggle"
+                        class="theme-toggle float-right"
+                        type="button"
+                        aria-pressed="false"
+                        aria-label="Switch to dark mode"
+                    >
+                        🌙 Dark
+                    </button>
                     <input type="checkbox" id="menu-control" />
                     <label class="menu-mobile float-right" for="menu-control">
                         <span class="btn-mobile float-right">&#9776;</span>
@@ -176,13 +290,7 @@
                         </ul>
 
                         <section class="projects">
-                            <h2
-                                style="
-                                    text-align: center;
-                                    margin-bottom: 1rem;
-                                    color: #fff;
-                                "
-                            >
+                            <h2 style="text-align: center; margin-bottom: 1rem">
                                 Projects
                             </h2>
                             <ul class="project-list">
@@ -342,6 +450,56 @@
         </main>
 
         <script src="/js/app.js"></script>
+
+        <script>
+            (function () {
+                const STORAGE_KEY = "themePreference";
+                const DARK_CLASS = "theme-dark";
+                const LIGHT_CLASS = "theme-light";
+                const toggleButton = document.getElementById("themeToggle");
+
+                function setTheme(mode) {
+                    const isDark = mode === "dark";
+                    document.body.classList.remove(DARK_CLASS, LIGHT_CLASS);
+                    document.body.classList.add(
+                        isDark ? DARK_CLASS : LIGHT_CLASS,
+                    );
+                    localStorage.setItem(STORAGE_KEY, mode);
+                    if (!toggleButton) return;
+                    toggleButton.textContent = isDark ? "☀️ Light" : "🌙 Dark";
+                    toggleButton.setAttribute(
+                        "aria-label",
+                        isDark
+                            ? "Switch to light mode"
+                            : "Switch to dark mode",
+                    );
+                    toggleButton.setAttribute("aria-pressed", isDark);
+                }
+
+                const saved = localStorage.getItem(STORAGE_KEY);
+                const prefersDark = window.matchMedia(
+                    "(prefers-color-scheme: dark)",
+                ).matches;
+                const initial = saved || (prefersDark ? "dark" : "light");
+                setTheme(initial);
+
+                window
+                    .matchMedia("(prefers-color-scheme: dark)")
+                    .addEventListener("change", function (event) {
+                        if (!localStorage.getItem(STORAGE_KEY)) {
+                            setTheme(event.matches ? "dark" : "light");
+                        }
+                    });
+
+                if (toggleButton) {
+                    toggleButton.addEventListener("click", function () {
+                        const currentlyDark =
+                            document.body.classList.contains(DARK_CLASS);
+                        setTheme(currentlyDark ? "light" : "dark");
+                    });
+                }
+            })();
+        </script>
 
         <script>
             (function ($) {
